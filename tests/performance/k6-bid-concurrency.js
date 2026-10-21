@@ -15,7 +15,7 @@ export const options = {
   }
 };
 
-const BASE_URL = __ENV.BASE_URL || 'https://distributed-auction-system.onrender.com';
+const BASE_URL = __ENV.BASE_URL || 'http://localhost:5000';
 const TOKEN = __ENV.TEST_USER_TOKEN || '';
 const AUCTION_ID = __ENV.AUCTION_ID || '66a000000000000000000000';
 
