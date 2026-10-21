@@ -1,0 +1,233 @@
+{
+  "info": {
+    "_postman_id": "c1f7a8b9-8e12-4c56-9a23-1d2e3f4a5b6c",
+    "name": "AuctionHouse API Automated Test Collection",
+    "description": "Postman functional and regression API test suite for Distributed Auction System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://distributed-auction-system.onrender.com",
+      "type": "string"
+    },
+    {
+      "key": "userToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "adminToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "auctionId",
+      "value": "66a000000000000000000000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Auction Management",
+      "item": [
+        {
+          "name": "TC_PM_AUC_01 - Get All Auctions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Response contains auctions array', function () {",
+                  "    var json = pm.response.json();",
+                  "    var list = Array.isArray(json) ? json : (json.data || json.auctions);",
+                  "    pm.expect(list).to.be.an('array');",
+                  "    if (list.length > 0) {",
+                  "        pm.collectionVariables.set('auctionId', list[0]._id || list[0].id);",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "TC_PM_AUC_02 - Get Auction Detail Valid ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions/{{auctionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions", "{{auctionId}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200 or 404', function () {",
+                  "    pm.expect([200, 404]).to.include(pm.response.code);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "TC_PM_AUC_03 - Get Auction With Malformed ID (Bug_K09 Check)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions/invalid_mongo_id_format",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions", "invalid_mongo_id_format"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 400 Bad Request, must not be 500 crash', function () {",
+                  "    pm.expect([400, 404]).to.include(pm.response.code);",
+                  "    pm.expect(pm.response.code).to.not.equal(500);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Bidding Process",
+      "item": [
+        {
+          "name": "TC_PM_BID_01 - Place Bid Without Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"amount\": 1500000}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions/{{auctionId}}/bid",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions", "{{auctionId}}", "bid"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 401 Unauthorized', function () {",
+                  "    pm.expect([401, 403, 404]).to.include(pm.response.code);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "TC_PM_BID_02 - Place Bid Below Step Price (Bug_K01 Check)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{userToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"amount\": 10}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions/{{auctionId}}/bid",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions", "{{auctionId}}", "bid"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 400 Bad Request', function () {",
+                  "    pm.expect([400, 404, 422]).to.include(pm.response.code);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Admin & Security",
+      "item": [
+        {
+          "name": "TC_PM_ADM_01 - Non-Admin Access Admin Route (Bug_K08 Check)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{userToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/auctions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "auctions"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 403 Forbidden for non-admin user', function () {",
+                  "    pm.expect(pm.response.code).to.equal(403);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
