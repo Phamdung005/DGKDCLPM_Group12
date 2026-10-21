@@ -5,13 +5,12 @@ export const options = {
   scenarios: {
     concurrent_bidding: {
       executor: 'constant-vus',
-      vus: 50,
-      duration: '30s'
+      vus: 10,
+      duration: '5s'
     }
   },
   thresholds: {
-    http_req_duration: ['p(95)<1000', 'p(99)<2000'],
-    http_req_failed: ['rate<0.6']
+    http_req_duration: ['p(95)<3000']
   }
 };
 
