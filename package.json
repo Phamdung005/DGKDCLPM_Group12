@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --verbose",
-    "test:coverage": "jest --coverage",
+    "test:unit": "jest tests/unit --verbose",
+    "test:coverage": "jest tests/unit --coverage",
     "test:api": "jest tests/api --runInBand --verbose",
-    "test:k6": "k6 run tests/performance/k6-bid-concurrency.js"
+    "test:k6": "node scripts/run-k6.js"
   },
   "devDependencies": {
     "dotenv": "^16.4.5",
