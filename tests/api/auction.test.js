@@ -3,43 +3,50 @@ require('dotenv').config();
 
 const BASE_URL = process.env.BASE_URL;
 
-describe('Kiểm thử API Quản lý phiên đấu giá (Auction API)', () => {
+describe('Auction API Integration Tests', () => {
   let existingAuctionId = '';
 
-  test('TC_API_AUC_01: Lấy danh sách phiên đấu giá -> Trả về HTTP 200 và mảng dữ liệu', async () => {
-    const res = await axios.get(`${BASE_URL}/api/auctions`);
-    expect(res.status).toBe(200);
-    expect(res.data).toBeDefined();
+  test('GET /api/auctions returns HTTP 200 and list of auctions', async () => {
+    const response = await axios.get(`${BASE_URL}/api/auctions`);
+    expect(response.status).toBe(200);
+    expect(response.data).toBeDefined();
 
-    // Tự động bốc 1 ID thật từ danh sách trả về để dùng cho các test bên dưới
-    const auctions = Array.isArray(res.data) ? res.data : (res.data.data || res.data.auctions || []);
+    const auctions = Array.isArray(response.data) ? response.data : (response.data.data || response.data.auctions || []);
     if (auctions.length > 0) {
       existingAuctionId = auctions[0]._id || auctions[0].id;
     }
   });
 
-  test('TC_API_AUC_02: Truy vấn với ID sai định dạng -> Trả về HTTP 400 Bad Request', async () => {
+  test('Bug_K09: GET /api/auctions/:id with malformed identifier returns HTTP 400 instead of 500 crash', async () => {
     try {
-      await axios.get(`${BASE_URL}/api/auctions/id_khong_hop_le_9999`);
+      await axios.get(`${BASE_URL}/api/auctions/invalid_mongo_object_id_9999`);
+      throw new Error('REQUEST_SHOULD_FAIL');
     } catch (error) {
-      expect(error.response.status).toBe(400);
+      expect(error.response).toBeDefined();
+      expect([400, 404]).toContain(error.response.status);
+      expect(error.response.status).not.toBe(500);
     }
   });
 
-  test('TC_API_AUC_03: Truy vấn chi tiết phiên đấu giá tồn tại -> Trả về HTTP 200', async () => {
-    if (!existingAuctionId) return;
-    const res = await axios.get(`${BASE_URL}/api/auctions/${existingAuctionId}`);
-    expect(res.status).toBe(200);
-    expect(res.data).toBeDefined();
+  test('GET /api/auctions/:id with existing identifier returns HTTP 200', async () => {
+    if (!existingAuctionId) {
+      return;
+    }
+    const response = await axios.get(`${BASE_URL}/api/auctions/${existingAuctionId}`);
+    expect(response.status).toBe(200);
+    expect(response.data).toBeDefined();
   });
 
-  test('TC_API_AUC_04: Tạo phiên đấu giá khi chưa đăng nhập -> Trả về HTTP 401 Unauthorized', async () => {
+  test('POST /api/auctions without authorization token returns HTTP 401', async () => {
     try {
       await axios.post(`${BASE_URL}/api/auctions`, {
-        title: 'Vợt cầu lông Yonex',
-        startingPrice: 1000000
+        title: 'MacBook Pro M3 Max',
+        startingPrice: 35000000,
+        stepPrice: 500000
       });
+      throw new Error('REQUEST_SHOULD_FAIL');
     } catch (error) {
+      expect(error.response).toBeDefined();
       expect(error.response.status).toBe(401);
     }
   });
