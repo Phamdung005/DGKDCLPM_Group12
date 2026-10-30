@@ -58,10 +58,11 @@
 | **Phạm Văn Tiến Dũng** | 23010681 | 23010681@st.phenikaa-uni.edu.vn | Trưởng nhóm | 25% | Hoàn thành |
 | **Tạ Thu Hương Linh** | 23010686 | 23010686@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
 | **Đoàn Văn Khánh** | 23010252 | 23010252@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
-| **Đoàn Hoàng Vũ** | 23010 | 23010@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
+| **Đoàn Hoàng Vũ** | 23010534 | 23010534@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
 
 **Video thuyết trình**: Bản MP4 lưu trữ trong kho dự án (`Video_thuyet_trinh_AuctionHouse.mp4`)
-**Web Demo trực tuyến**: https://github.com/Phamdung005/Distributed-Auction-System
+**Web Demo trực tuyến**: https://distributed-auction-system.vercel.app/ (Lưu ý: đợi khoảng 1 phút và reload để server hoạt động)
+**Mã nguồn dự án gốc**: https://github.com/Phamdung005/Distributed-Auction-System
 
 ---
 
@@ -442,8 +443,8 @@ Bộ kiểm thử **hộp trắng (White-box)** cho file `src/auctionEngine.js`,
 
 | Tài Nguyên | Đường Dẫn |
 |-----------|----------|
-| **Hệ thống AuctionHouse (Live Demo)** | https://github.com/Phamdung005/Distributed-Auction-System |
-| **Kho kiểm thử (Repo này)** | https://github.com/Phamdung005/AuctionHouse-QA-Tests |
+| **Hệ thống AuctionHouse (Live Demo)** | [https://github.com/Phamdung005/Distributed-Auction-System](https://distributed-auction-system.vercel.app/) |
+| **Kho mã nguồn hệ thống** | [https://github.com/Phamdung005/AuctionHouse-QA-Tests](https://github.com/Phamdung005/Distributed-Auction-System) |
 | **Tài liệu Grafana k6** | https://grafana.com/docs/k6/latest/ |
 | **Tài liệu Jest** | https://jestjs.io/docs/getting-started |
 | **Chuẩn IEEE 829** | IEEE Standard for Software Test Documentation |
