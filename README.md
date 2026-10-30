@@ -60,10 +60,11 @@
 | **Đoàn Văn Khánh** | 23010252 | 23010252@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
 | **Đoàn Hoàng Vũ** | 23010534 | 23010534@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
 
-**Video thuyết trình**: Bản MP4 lưu trữ trong kho dự án (`Video_thuyet_trinh_AuctionHouse.mp4`)
-**Web Demo trực tuyến**: https://distributed-auction-system.vercel.app/ (Lưu ý: đợi khoảng 1 phút và reload để server hoạt động)
-**Mã nguồn dự án gốc**: https://github.com/Phamdung005/Distributed-Auction-System
-
+* **Video thuyết trình**: Bản MP4 lưu trữ trong kho dự án (`Video_thuyet_trinh_AuctionHouse.mp4`)
+* **Web Demo trực tuyến**: https://distributed-auction-system.vercel.app/ (Lưu ý: đợi khoảng 1 phút và reload để server hoạt động)
+* **Mã nguồn dự án gốc**: https://github.com/Phamdung005/Distributed-Auction-System
+* **Bảng danh sách testcase và bug report**: [Xem file Testcase & Bug Report (Excel)](./Group12_SOFTWARETESTING.xlsx)
+* **Slide thuyết trình**: [Xem slide](./auction-house-presentation.pptx)
 ---
 
 ## 3. Phân Công Công Việc Chi Tiết
