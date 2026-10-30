@@ -319,27 +319,37 @@ Bộ kiểm thử **hộp trắng (White-box)** cho file `src/auctionEngine.js`,
 
 ### 8.2 API Integration Tests
 
-#### `bid.test.js` — Kiểm Thử Phân Hệ Bidding
+#### `bid.test.js` — Kiểm Thử Phân Hệ Bidding (7 test cases)
 
-| # | Mã Bug | Tên Test Case | Phương Thức | Kết Quả Mong Đợi |
-|---|--------|--------------|-------------|------------------|
-| 1 | — | Đặt giá không có xác thực trả về 401 | `POST /api/auctions/:id/bid` | HTTP `401 / 403` |
-| 2 | — | Thiếu trường `amount` trong body trả về 400 | `POST /api/auctions/:id/bid` | HTTP `400` |
-| 3 | **Bug_K01** | Giá thấp hơn bước giá tối thiểu trả về 400 | `POST /api/auctions/:id/bid` | HTTP `400 / 422` |
-| 4 | **Bug_K02** | Từ chối người bán tự đặt giá vào phiên của mình | `POST /api/auctions/:id/bid` | HTTP `403 / 400` |
-| 5 | **Bug_K03** | Từ chối đặt giá vào phiên không ACTIVE | `POST /api/auctions/:id/bid` | HTTP `400 / 404` |
-| 6 | **Bug_K04** | Từ chối khi số dư cọc không đủ | `POST /api/auctions/:id/bid` | HTTP `400 / 402` |
-| 7 | **Bug_001** | **2 yêu cầu đồng thời cùng giá → chỉ 1 thắng** | Concurrent `POST` | `successfulResponses.length ≤ 1` |
+| # | Tên Test Case | Endpoint | Kết Quả Mong Đợi |
+|---|--------------|----------|------------------|
+| 1 | Đặt giá không có Authorization header | `POST /api/auctions/:id/bid` | HTTP `401 / 403 / 404` |
+| 2 | Thiếu trường `amount` trong request body | `POST /api/auctions/:id/bid` | HTTP `400 / 404` |
+| 3 | Giá đặt thấp hơn bước giá tối thiểu (`amount = 1`) | `POST /api/auctions/:id/bid` | HTTP `400 / 404 / 422` |
+| 4 | Người bán (seller) tự đặt giá vào phiên của mình | `POST /api/auctions/:id/bid` | HTTP `400 / 403 / 404 / 422` |
+| 5 | Đặt giá vào phiên không tồn tại / không ACTIVE | `POST /api/auctions/invalid_id/bid` | HTTP `400 / 404 / 409` |
+| 6 | Đặt giá vượt số dư cọc (`amount = 1.000.000.000`) | `POST /api/auctions/:id/bid` | HTTP `400 / 402 / 404 / 422` |
+| 7 | 2 request đồng thời cùng giá → chỉ 1 được chấp nhận (Race Condition) | Concurrent `POST` | `successfulResponses.length ≤ 1` |
 
-#### `auction.test.js` — Kiểm Thử Phân Hệ Auction
+#### `auction.test.js` — Kiểm Thử Phân Hệ Auction (4 test cases)
 
-Bao phủ các ca kiểm thử liên quan đến **Bug_K09**: Tạo, xem và quản lý phiên đấu giá, bao gồm kiểm tra validation dữ liệu đầu vào (giá khởi điểm âm, thiếu thông tin bắt buộc).
+| # | Tên Test Case | Endpoint | Kết Quả Mong Đợi |
+|---|--------------|----------|------------------|
+| 1 | Lấy danh sách phiên đấu giá thành công | `GET /api/auctions` | HTTP `200`, data defined |
+| 2 | ID phiên sai định dạng MongoDB trả 400 thay vì crash 500 | `GET /api/auctions/invalid_id` | HTTP `400 / 404`, không phải `500` |
+| 3 | Xem chi tiết phiên hợp lệ thành công | `GET /api/auctions/:id` | HTTP `200`, data defined |
+| 4 | Tạo phiên không có Authorization header | `POST /api/auctions` | HTTP `401` |
 
-#### `admin.test.js` — Kiểm Thử Admin & RBAC
+#### `admin.test.js` — Kiểm Thử Admin & Phân Quyền (5 test cases)
 
-Bao phủ các ca kiểm thử liên quan đến:
-- **Bug_K06**: Từ chối truy cập API Admin khi tài khoản không có quyền
-- **Bug_K08**: Leo thang đặc quyền — User nâng quyền Admin thông qua API
+| # | Tên Test Case | Endpoint | Kết Quả Mong Đợi |
+|---|--------------|----------|------------------|
+| 1 | Xóa phiên không có token | `DELETE /api/auctions/:id` | HTTP `401 / 403` |
+| 2 | Hủy phiên không có token | `POST /api/auctions/:id/cancel` | HTTP `401 / 403` |
+| 3 | Bidder thường không được phép hủy phiên đấu giá | `POST /api/auctions/:id/cancel` | HTTP `401 / 403 / 404` |
+| 4 | Bidder thường không được phép xóa phiên đấu giá | `DELETE /api/auctions/:id` | HTTP `401 / 403 / 404` |
+| 5 | Admin hủy/kết thúc phiên không tồn tại trả lỗi hợp lệ | `POST /api/auctions/000.../cancel` | HTTP `400 / 401 / 403 / 404` |
+
 
 ---
 
@@ -393,22 +403,23 @@ Bao phủ các ca kiểm thử liên quan đến:
 
 ## 10. Danh Sách Khiếm Khuyết (Defect Log)
 
-| Mã Lỗi | Mô Tả Ngắn | Mức Độ | Trạng Thái |
-|--------|-----------|--------|-----------|
-| **Bug_001** | Race Condition: 2 request đồng thời cùng giá đều ghi thành công | Critical | Đã vá (Redis Redlock) |
-| **Bug_K01** | API không trả về 400 khi giá thấp hơn bước giá tối thiểu | High | Đã vá |
-| **Bug_K02** | Người bán tự đặt giá vào phiên của mình thành công (Self-bidding) | Critical | Đã vá |
-| **Bug_K03** | Chấp nhận đặt giá vào phiên đã kết thúc (CLOSED) | High | Đã vá |
-| **Bug_K04** | Không kiểm tra số dư cọc trước khi cho phép đặt giá | Critical | Đã vá |
-| **Bug_K05** | Cọc tham gia không được hoàn trả đúng sau khi phiên hủy | Critical | Đã vá |
-| **Bug_K06** | Tài khoản thường truy cập được API Admin mà không bị chặn | Critical | Đã vá (RBAC Middleware) |
-| **Bug_K07** | Token JWT đã logout vẫn hợp lệ để xác thực | Critical | Đã vá (JWT Blacklist) |
-| **Bug_K08** | Leo thang đặc quyền: User nâng quyền Admin thông qua API | Critical | Đã vá |
-| **Bug_K09** | Tạo phiên đấu giá với giá khởi điểm âm không bị chặn | High | Đã vá |
-| **Bug_K10** | Không giới hạn số lần đăng nhập sai (Brute Force) | Medium | Đang xử lý |
-| **Bug_K11** | Thông báo lỗi đăng nhập tiết lộ thông tin tài khoản tồn tại | Medium | Đang xử lý |
-| **Bug_K12** | Giá trị p₉₅ tăng đột biến khi concurrency > 40 VUs | Medium | Đang xử lý |
-| **Bug_K13** | Không có cơ chế rollback khi giao dịch thanh toán thất bại giữa chừng | Critical | Đã vá |
+> Nguồn dữ liệu: `Group12_SOFTWARETESTING (4).xlsx` — Sheet **Bug_Report** (13 lỗi, Bug_K01 → Bug_K13)
+
+| Mã Lỗi | Module | Mô Tả Lỗi | Mức Độ | Trạng Thái |
+|--------|--------|-----------|--------|-----------|
+| **Bug_K01** | Bidding | Người dùng vẫn có thể đặt giá thành công sau khi admin hủy phiên đấu giá | Major | Đã vá |
+| **Bug_K02** | Auction | Backend cho phép tạo phiên với giá khởi điểm = 0 (HTTP 201 thay vì báo lỗi) | Medium | Đã vá |
+| **Bug_K03** | Auction | Không validate `depositAmount` khi tạo phiên — giá trị âm được chấp nhận và bỏ qua | Medium | Đang xử lý |
+| **Bug_K04** | Auction | Lỗi nghiệp vụ/validate trả về HTTP 500 thay vì HTTP 400 (buyNow ≤ startPrice, endTime ≤ startTime…) | Low | Đã vá |
+| **Bug_K05** | Auction | Xem phiên không tồn tại trả về 400/500 thay vì 404 | Low | Đã vá |
+| **Bug_K06** | Auction | Tìm kiếm phiên đấu giá không lọc đúng kết quả — backend bỏ qua tham số `?title=` | Medium | Đang xử lý |
+| **Bug_K07** | Auction | Seller sửa được giá khởi điểm và thông tin phiên đang ở trạng thái Active | Critical | Đã vá |
+| **Bug_K08** | Auction | Admin hủy phiên: seller không nhận thông báo realtime; UI Admin thiếu ô nhập lý do hủy | Medium | Đang xử lý |
+| **Bug_K09** | Admin | Khóa tài khoản không thu hồi JWT token đang hoạt động — token cũ vẫn hợp lệ (HTTP 200) | Major | Đã vá |
+| **Bug_K10** | Admin | API cưỡng chế kết thúc phiên trả HTTP 500 — phiên vẫn ở trạng thái Active, không chốt winner | Major | Đã vá |
+| **Bug_K11** | Admin | Trang Admin không hiển thị thống kê tài chính (biểu đồ, tổng nạp/cọc/doanh thu = 0) | Medium | Đang xử lý |
+| **Bug_K12** | Wallet | Người thua đấu giá không được hoàn cọc ngay khi phiên kết thúc | Critical | Đã vá |
+| **Bug_K13** | Auction | Không có thông báo thắng đấu giá khi phiên kết thúc (dù đơn hàng đã được tạo) | Medium | Đang xử lý |
 
 ---
 
