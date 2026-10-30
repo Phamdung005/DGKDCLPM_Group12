@@ -443,8 +443,8 @@ Bộ kiểm thử **hộp trắng (White-box)** cho file `src/auctionEngine.js`,
 
 | Tài Nguyên | Đường Dẫn |
 |-----------|----------|
-| **Hệ thống AuctionHouse (Live Demo)** | [https://github.com/Phamdung005/Distributed-Auction-System](https://distributed-auction-system.vercel.app/) |
-| **Kho mã nguồn hệ thống** | [https://github.com/Phamdung005/AuctionHouse-QA-Tests](https://github.com/Phamdung005/Distributed-Auction-System) |
+| **Hệ thống AuctionHouse (Live Demo)** | https://distributed-auction-system.vercel.app/ |
+| **Kho mã nguồn hệ thống** | https://github.com/Phamdung005/Distributed-Auction-System |
 | **Tài liệu Grafana k6** | https://grafana.com/docs/k6/latest/ |
 | **Tài liệu Jest** | https://jestjs.io/docs/getting-started |
 | **Chuẩn IEEE 829** | IEEE Standard for Software Test Documentation |
