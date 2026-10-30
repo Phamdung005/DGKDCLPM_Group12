@@ -55,10 +55,10 @@
 
 | Họ và Tên | Mã Sinh Viên | Email | Vai Trò | Tỉ Lệ Đóng Góp | Đánh Giá |
 |-----------|-------------|-------|---------|-----------------|----------|
-| **Phạm Văn Tiến Dũng** | 2101... | dung.pvt@st.phenikaa-uni.edu.vn | Trưởng nhóm | 25% | ✅ Hoàn thành |
-| **Tạ Thu Hương Linh** | 2101... | linh.tth@st.phenikaa-uni.edu.vn | Thành viên | 25% | ✅ Hoàn thành |
-| **Đoàn Văn Khánh** | 2101... | khanh.dv@st.phenikaa-uni.edu.vn | Thành viên | 25% | ✅ Hoàn thành |
-| **Đoàn Hoàng Vũ** | 2101... | vu.dh@st.phenikaa-uni.edu.vn | Thành viên | 25% | ✅ Hoàn thành |
+| **Phạm Văn Tiến Dũng** | 23010681 | 23010681@st.phenikaa-uni.edu.vn | Trưởng nhóm | 25% | Hoàn thành |
+| **Tạ Thu Hương Linh** | 23010686 | 23010686@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
+| **Đoàn Văn Khánh** | 23010252 | 23010252@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
+| **Đoàn Hoàng Vũ** | 23010 | 23010@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
 
 **Video thuyết trình**: Bản MP4 lưu trữ trong kho dự án (`Video_thuyet_trinh_AuctionHouse.mp4`)
 **Web Demo trực tuyến**: https://github.com/Phamdung005/Distributed-Auction-System
@@ -387,9 +387,9 @@ Bao phủ các ca kiểm thử liên quan đến:
 
 | Chỉ Số | Kết Quả | Ngưỡng Yêu Cầu |
 |--------|---------|-----------------|
-| Độ trễ trung bình | **88.4 ms** | < 1000 ms ✅ |
-| Độ trễ p₉₅ | **108.17 ms** | < 1000 ms ✅ |
-| Tỷ lệ lỗi mạng | **0.00%** | < 5% ✅ |
+| Độ trễ trung bình | **88.4 ms** | < 1000 ms |
+| Độ trễ p₉₅ | **108.17 ms** | < 1000 ms |
+| Tỷ lệ lỗi mạng | **0.00%** | < 5% |
 
 ---
 
@@ -397,20 +397,20 @@ Bao phủ các ca kiểm thử liên quan đến:
 
 | Mã Lỗi | Mô Tả Ngắn | Mức Độ | Trạng Thái |
 |--------|-----------|--------|-----------|
-| **Bug_001** | Race Condition: 2 request đồng thời cùng giá đều ghi thành công | 🔴 Critical | ✅ Đã vá (Redis Redlock) |
-| **Bug_K01** | API không trả về 400 khi giá thấp hơn bước giá tối thiểu | 🟠 High | ✅ Đã vá |
-| **Bug_K02** | Người bán tự đặt giá vào phiên của mình thành công (Self-bidding) | 🔴 Critical | ✅ Đã vá |
-| **Bug_K03** | Chấp nhận đặt giá vào phiên đã kết thúc (CLOSED) | 🟠 High | ✅ Đã vá |
-| **Bug_K04** | Không kiểm tra số dư cọc trước khi cho phép đặt giá | 🔴 Critical | ✅ Đã vá |
-| **Bug_K05** | Cọc tham gia không được hoàn trả đúng sau khi phiên hủy | 🔴 Critical | ✅ Đã vá |
-| **Bug_K06** | Tài khoản thường truy cập được API Admin mà không bị chặn | 🔴 Critical | ✅ Đã vá (RBAC Middleware) |
-| **Bug_K07** | Token JWT đã logout vẫn hợp lệ để xác thực | 🔴 Critical | ✅ Đã vá (JWT Blacklist) |
-| **Bug_K08** | Leo thang đặc quyền: User nâng quyền Admin thông qua API | 🔴 Critical | ✅ Đã vá |
-| **Bug_K09** | Tạo phiên đấu giá với giá khởi điểm âm không bị chặn | 🟠 High | ✅ Đã vá |
-| **Bug_K10** | Không giới hạn số lần đăng nhập sai (Brute Force) | 🟡 Medium | ⚠️ Đang xử lý |
-| **Bug_K11** | Thông báo lỗi đăng nhập tiết lộ thông tin tài khoản tồn tại | 🟡 Medium | ⚠️ Đang xử lý |
-| **Bug_K12** | Giá trị p₉₅ tăng đột biến khi concurrency > 40 VUs | 🟡 Medium | ⚠️ Đang xử lý |
-| **Bug_K13** | Không có cơ chế rollback khi giao dịch thanh toán thất bại giữa chừng | 🔴 Critical | ✅ Đã vá |
+| **Bug_001** | Race Condition: 2 request đồng thời cùng giá đều ghi thành công | Critical | Đã vá (Redis Redlock) |
+| **Bug_K01** | API không trả về 400 khi giá thấp hơn bước giá tối thiểu | High | Đã vá |
+| **Bug_K02** | Người bán tự đặt giá vào phiên của mình thành công (Self-bidding) | Critical | Đã vá |
+| **Bug_K03** | Chấp nhận đặt giá vào phiên đã kết thúc (CLOSED) | High | Đã vá |
+| **Bug_K04** | Không kiểm tra số dư cọc trước khi cho phép đặt giá | Critical | Đã vá |
+| **Bug_K05** | Cọc tham gia không được hoàn trả đúng sau khi phiên hủy | Critical | Đã vá |
+| **Bug_K06** | Tài khoản thường truy cập được API Admin mà không bị chặn | Critical | Đã vá (RBAC Middleware) |
+| **Bug_K07** | Token JWT đã logout vẫn hợp lệ để xác thực | Critical | Đã vá (JWT Blacklist) |
+| **Bug_K08** | Leo thang đặc quyền: User nâng quyền Admin thông qua API | Critical | Đã vá |
+| **Bug_K09** | Tạo phiên đấu giá với giá khởi điểm âm không bị chặn | High | Đã vá |
+| **Bug_K10** | Không giới hạn số lần đăng nhập sai (Brute Force) | Medium | Đang xử lý |
+| **Bug_K11** | Thông báo lỗi đăng nhập tiết lộ thông tin tài khoản tồn tại | Medium | Đang xử lý |
+| **Bug_K12** | Giá trị p₉₅ tăng đột biến khi concurrency > 40 VUs | Medium | Đang xử lý |
+| **Bug_K13** | Không có cơ chế rollback khi giao dịch thanh toán thất bại giữa chừng | Critical | Đã vá |
 
 ---
 
@@ -438,37 +438,3 @@ Bao phủ các ca kiểm thử liên quan đến:
 | **Tài liệu Grafana k6** | https://grafana.com/docs/k6/latest/ |
 | **Tài liệu Jest** | https://jestjs.io/docs/getting-started |
 | **Chuẩn IEEE 829** | IEEE Standard for Software Test Documentation |
-
----
-
-<div align="center">
-
-**© 2024 — Nhóm 12 — Môn Đánh giá và Kiểm định Chất lượng Phần mềm**
-**Trường Công nghệ Thông tin, Đại học Phenikaa**
-*Mã nguồn phục vụ mục đích học tập và nghiên cứu.*
-
-</div>
-Hệ thống đạt độ ổn định cao ở các phân hệ xác thực, ví tiền và chat thời gian thực (tỷ lệ Pass thủ công đạt 88.1%). Các lỗi tranh chấp dữ liệu nghiêm trọng (Race Condition) và lỗ hổng phân quyền (RBAC) đã được vá triệt để bằng khóa phân tán Redis Redlock và middleware bảo mật. Hệ thống vượt qua các bài kiểm thử hiệu năng với độ trễ phản hồi $p_{95} = 108.17\text{ms}$ và tỷ lệ lỗi mạng 0.00%.Hệ thống được kiểm thửKiến trúc: Mô hình phân tán Microservices / RESTful API.Giao diện (Frontend): Tailwind CSS kết hợp thư viện Ant Design (Responsive UI).Máy chủ (Backend): Node.js và Express.js.Cơ sở dữ liệu và Cache: MongoDB (dữ liệu giao dịch) kết hợp Redis (Khóa phân tán Redlock chống tranh chấp).Hạ tầng triển khai: Đám mây Render Cloud Platform.Xác thực và Bảo mật: JWT Authentication, mật khẩu mã hóa bcrypt, phân quyền Role-Based Access Control (RBAC).Phương pháp và Công cụ Kiểm thửLoại kiểm thửCấp độKỹ thuật chínhCông cụ sử dụngKiểm thử Chức năngHệ thốngPhân vùng tương đương, giá trị biên, bảng quyết địnhExcel, Postman Collection v2.1Kiểm thử Đơn vị (Unit Test)Hộp trắngKiểm thử nhánh, điều kiện, giả lập logicJest (auctionEngine.test.js)Kiểm thử Tích hợp APITích hợpKiểm tra route, middleware, phản hồi HTTP StatusJest, Axios, SupertestKiểm thử Hiệu năng (Load Test)Hệ thốngKiểm thử tải đồng thời (Concurrency testing)Grafana k6, Apache JMeterKiểm thử Bảo mậtHệ thốngKiểm tra phân quyền BOLA, chống ghi đè Race ConditionRedis Redlock, JWT BlacklistCấu trúc Thư mục Kho mã nguồn (Repository Structure)Plaintext├── src/
-│   ├── auctionEngine.js           # Động cơ nghiệp vụ lõi (Validate bid, Deposit 10%, Settlement)
-│   ├── controllers/               # Các controller xử lý logic nghiệp vụ
-│   ├── models/                    # Lược đồ cơ sở dữ liệu Mongoose (User, Auction, Wallet, Bid)
-│   └── routes/                    # Định tuyến API (Auth, Auction, Bid, Admin, Wallet)
-├── tests/
-│   ├── unit/
-│   │   └── auctionEngine.test.js  # Unit tests bao phủ 100% Statement, Branch, Function, Line
-│   ├── api/
-│   │   ├── auction.test.js        # API tests cho phân hệ Auction (Bug_K09)
-│   │   ├── bid.test.js            # API tests cho phân hệ Bidding (Bug_001, Bug_K01 đến K03)
-│   │   └── admin.test.js          # API tests cho Admin & RBAC (Bug_K06, Bug_K08)
-│   ├── postman/
-│   │   └── AuctionHouse_API_Collection.json # Postman Automated Collection v2.1
-│   └── performance/
-│       ├── k6-bid-concurrency.js                 # Kịch bản k6 tải đồng thời (10-50 VUs)
-│       └── AuctionHouse_Bidding_Concurrency.jmx  # Kịch bản Apache JMeter Test Plan
-├── package.json
-└── README.md
-Hướng dẫn Cài đặt và Thực thi Kiểm thử1. Cài đặt các thư viện phụ thuộcBashnpm install
-2. Chạy kiểm thử đơn vị và kiểm tra độ bao phủ 100% (Unit Test & Coverage)Bashnpm run test:coverage
-3. Chạy kịch bản kiểm thử API tích hợp tự độngBashnpm run test:api
-4. Chạy kiểm thử hiệu năng và tranh chấp tải đồng thời (Grafana k6)Bashnpm run test:k6
-5. Chạy kiểm thử hiệu năng với Apache JMeterMở ứng dụng Apache JMeter -> Chọn File > Open -> Trỏ tới tệp tests/performance/AuctionHouse_Bidding_Concurrency.jmx và nhấn nút Run (Start).Kết quả Chính đạt đượcKiểm thử thủ công (Manual Testing): Hoàn thành 101/101 Ca kiểm thử (100%), ghi nhận 89 PASS (88.1%) và 12 FAIL (11.9%), phát hiện 13 lỗi cốt lõi (Bug_K01 đến Bug_K13).Kiểm thử tự động (Automation Test): Bộ Unit Test Jest đạt 100% Code Coverage (Statements, Branch, Functions, Lines); 16/16 API tests Pass hoàn toàn trong 3.14 giây.Kiểm thử hiệu năng (Performance): Đạt độ trễ trung bình 88.4ms, $p_{95} = 108.17\text{ms}$ (vượt tiêu chuẩn $< 1000\text{ms}$) với 0.00% tỷ lệ lỗi.Mã nguồn dự án phục vụ mục đích học tập và nghiên cứu tại Trường Đại học Phenikaa.
