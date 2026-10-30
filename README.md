@@ -71,16 +71,14 @@
 |---|-----------|----------------|-----------------|
 | 1 | **Quản lý dự án** | Lập kế hoạch thực hiện đồ án, phân chia công việc, quản lý tiến độ nhóm và làm việc với giảng viên hướng dẫn | Phạm Văn Tiến Dũng |
 | 2 | **Đặc tả yêu cầu** | Đặc tả yêu cầu phần mềm: Use Case phân hệ đấu giá, ví tiền, quản lý phiên và đối chiếu mã nguồn | Tạ Thu Hương Linh |
-| 3 | **Thiết kế hệ thống** | Xây dựng các sơ đồ thiết kế hệ thống: Sơ đồ kiến trúc, Use Case, Sequence, ERD cơ sở dữ liệu | Đoàn Văn Khánh |
-| 4 | **Kế hoạch kiểm thử** | Thiết kế kế hoạch kiểm thử theo chuẩn **IEEE 829** và **IEEE 730** | Phạm Văn Tiến Dũng |
-| 5 | **Môi trường kiểm thử** | Dựng môi trường kiểm thử: Node.js, MongoDB, Redis (Redlock), dữ liệu mẫu và tài khoản test | Đoàn Hoàng Vũ |
-| 6 | **Test Cases thủ công** | Thiết kế và thực hiện **101 Ca kiểm thử** thủ công, lập ma trận truy vết Defect Log | Đoàn Văn Khánh, Đoàn Hoàng Vũ |
-| 7 | **Kiểm thử tự động** | Viết bộ kiểm thử tự động Unit Test và API Testing bằng **Jest** và **Axios**, đo độ bao phủ mã nguồn | Phạm Văn Tiến Dũng, Tạ Thu Hương Linh |
-| 8 | **Kiểm thử hiệu năng** | Kiểm thử hiệu năng và chịu tải đồng thời bằng **Grafana k6** và **Apache JMeter**, phân tích lỗi Race Condition | Phạm Văn Tiến Dũng |
-| 9 | **Kiểm thử bảo mật** | Kiểm thử bảo mật: Phân quyền RBAC, BOLA, JWT Revocation, Token Blacklist | Tạ Thu Hương Linh |
-| 10 | **Tổng hợp lỗi** | Tổng hợp **13 khiếm khuyết** (Defect Log), đánh giá chất lượng theo tiêu chí kiểm thử và kết luận | Phạm Văn Tiến Dũng |
-| 11 | **Tài nguyên hình ảnh** | Chụp ảnh giao diện, chuẩn hóa hình minh chứng và đồng bộ tài nguyên trong kho mã nguồn | Đoàn Hoàng Vũ |
-| 12 | **Tổng hợp báo cáo** | Tổng hợp báo cáo, hoàn thiện tài liệu, chuẩn bị slide thuyết trình và kịch bản quay video | Toàn bộ nhóm |
+| 3 | **Kế hoạch kiểm thử** | Thiết kế kế hoạch kiểm thử theo chuẩn **IEEE 829** và **IEEE 730** | Phạm Văn Tiến Dũng |
+| 4 | **Môi trường kiểm thử** | Dựng môi trường kiểm thử: Node.js, MongoDB, Redis (Redlock), dữ liệu mẫu và tài khoản test | Đoàn Hoàng Vũ |
+| 5 | **Test Cases thủ công** | Thiết kế và thực hiện **101 Ca kiểm thử** thủ công, lập ma trận truy vết Defect Log | Đoàn Văn Khánh, Đoàn Hoàng Vũ |
+| 6 | **Kiểm thử tự động** | Viết bộ kiểm thử tự động Unit Test và API Testing bằng **Jest** và **Axios**, đo độ bao phủ mã nguồn | Phạm Văn Tiến Dũng, Tạ Thu Hương Linh |
+| 7 | **Kiểm thử hiệu năng** | Kiểm thử hiệu năng và chịu tải đồng thời bằng **Grafana k6** và **Apache JMeter**, phân tích lỗi Race Condition | Phạm Văn Tiến Dũng |
+| 8 | **Kiểm thử bảo mật** | Kiểm thử bảo mật: Phân quyền RBAC, BOLA, JWT Revocation, Token Blacklist | Tạ Thu Hương Linh |
+| 9 | **Tổng hợp lỗi** | Tổng hợp **13 khiếm khuyết** (Defect Log), đánh giá chất lượng theo tiêu chí kiểm thử và kết luận | Phạm Văn Tiến Dũng |
+| 10 | **Tổng hợp báo cáo** | Tổng hợp báo cáo, hoàn thiện tài liệu, chuẩn bị slide thuyết trình và kịch bản quay video | Toàn bộ nhóm |
 
 ---
 
