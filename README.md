@@ -63,6 +63,7 @@
 * **Video thuyết trình**: Bản MP4 lưu trữ trong kho dự án (`Video_thuyet_trinh_AuctionHouse.mp4`)
 * **Web Demo trực tuyến**: https://distributed-auction-system.vercel.app/ (Lưu ý: đợi khoảng 1 phút và reload để server hoạt động)
 * **Mã nguồn dự án gốc**: https://github.com/Phamdung005/Distributed-Auction-System
+* **Báo cáo bài tập lớn**: [Xem báo cáo](./Group_12_Đánh_giá_và_kiểm_định_chất_lượng_phần_mềm.docx)
 * **Bảng danh sách testcase và bug report**: [Xem file Testcase & Bug Report (Excel)](./Group12_SOFTWARETESTING.xlsx)
 * **Slide thuyết trình**: [Xem slide](./auction-house-presentation.pptx)
 ---
