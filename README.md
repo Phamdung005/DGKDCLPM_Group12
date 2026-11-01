@@ -60,7 +60,7 @@
 | **Đoàn Văn Khánh** | 23010252 | 23010252@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
 | **Đoàn Hoàng Vũ** | 23010534 | 23010534@st.phenikaa-uni.edu.vn | Thành viên | 25% | Hoàn thành |
 
-* **Video thuyết trình**: Bản MP4 lưu trữ trong kho dự án [Tải video trực tiếp](./Group15_videothuyettrinh_demo) - [xem tại drive](https://drive.google.com/file/d/1-h_LFge53gIziVPn7l4SbeeexkwaUVtT/view?usp=sharing)
+* **Video thuyết trình**: [Tải video trực tiếp](./Group15_videothuyettrinh_demo.mp4) - [xem tại Google Drive](https://drive.google.com/file/d/1-h_LFge53gIziVPn7l4SbeeexkwaUVtT/view?usp=sharing)
 * **Web Demo trực tuyến**: https://distributed-auction-system.vercel.app/ (Lưu ý: đợi khoảng 1 phút và reload để server hoạt động)
 * **Mã nguồn dự án gốc**: https://github.com/Phamdung005/Distributed-Auction-System
 * **Báo cáo bài tập lớn**: [Xem báo cáo](./Group_12_Đánh_giá_và_kiểm_định_chất_lượng_phần_mềm.docx)
